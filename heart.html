@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>跳动的心 - 送给特别的你</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        header {
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255, 50, 50, 0.7);
+            background: linear-gradient(45deg, #ff7e7e, #ff4d4d, #ff0000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        /* 心跳区域 */
+        .heart-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 30px auto 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 主跳动的心 */
+        .heart {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            background-color: #ff0000;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.8), 
+                        inset 0 0 30px rgba(255, 100, 100, 0.6);
+            transform: rotate(45deg);
+            animation: heartbeat 1.2s infinite;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background-color: #ff0000;
+            border-radius: 50%;
+        }
+        
+        .heart:before {
+            top: -90px;
+            left: 0;
+        }
+        
+        .heart:after {
+            top: 0;
+            left: -90px;
+        }
+        
+        /* 心跳动画 */
+        @keyframes heartbeat {
+            0% {
+                transform: rotate(45deg) scale(1);
+                box-shadow: 0 0 50px rgba(255, 0, 0, 0.8), 
+                            inset 0 0 30px rgba(255, 100, 100, 0.6);
+            }
+            5% {
+                transform: rotate(45deg) scale(1.1);
+                box-shadow: 0 0 70px rgba(255, 0, 0, 1), 
+                            inset 0 0 40px rgba(255, 150, 150, 0.8);
+            }
+            10% {
+                transform: rotate(45deg) scale(1);
+                box-shadow: 0 0 50px rgba(255, 0, 0, 0.8), 
+                            inset 0 0 30px rgba(255, 100, 100, 0.6);
+            }
+            15% {
+                transform: rotate(45deg) scale(1.15);
+                box-shadow: 0 0 80px rgba(255, 0, 0, 1), 
+                            inset 0 0 50px rgba(255, 150, 150, 0.9);
+            }
+            20% {
+                transform: rotate(45deg) scale(1);
+                box-shadow: 0 0 50px rgba(255, 0, 0, 0.8), 
+                            inset 0 0 30px rgba(255, 100, 100, 0.6);
+            }
+            100% {
+                transform: rotate(45deg) scale(1);
+                box-shadow: 0 0 50px rgba(255, 0, 0, 0.8), 
+                            inset 0 0 30px rgba(255, 100, 100, 0.6);
+            }
+        }
+        
+        /* 心跳光环效果 */
+        .heart-glow {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 50, 50, 0.4) 0%, transparent 70%);
+            animation: pulse 1.5s infinite;
+            z-index: 1;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* 周围的小爱心 */
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 5;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(255, 100, 100, 0.7);
+            animation: float 4s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* 控制区域 */
+        .controls {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            margin-top: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .controls h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #ffcccc;
+        }
+        
+        .slider-container {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 10px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #ff4d4d;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        #pauseBtn {
+            background: linear-gradient(45deg, #ff7e7e, #ff4d4d);
+            color: white;
+        }
+        
+        #colorBtn {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+        }
+        
+        #resetBtn {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            color: white;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        /* 底部信息 */
+        footer {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .wechat-tip {
+            background: rgba(0, 200, 0, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            border-left: 4px solid #09bb07;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .heart-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .heart {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .heart:before,
+            .heart:after {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .heart:before {
+                top: -75px;
+            }
+            
+            .heart:after {
+                left: -75px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            button {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>❤️ 跳动的心 ❤️</h1>
+            <p class="subtitle">每一颗心都有它独特的节奏，正如每个人都有自己的故事</p>
+        </header>
+        
+        <main>
+            <div class="heart-container">
+                <div class="heart-glow"></div>
+                <div class="heart" id="mainHeart"></div>
+                <div class="floating-hearts" id="floatingHearts"></div>
+            </div>
+            
+            <div class="controls">
+                <h2><i class="fas fa-sliders-h"></i> 心跳控制中心</h2>
+                
+                <div class="slider-container">
+                    <label for="speedRange"><i class="fas fa-tachometer-alt"></i> 心跳速度: <span id="speedValue">正常</span></label>
+                    <input type="range" id="speedRange" min="0.5" max="3" step="0.1" value="1">
+                </div>
+                
+                <div class="slider-container">
+                    <label for="sizeRange"><i class="fas fa-expand-alt"></i> 心脏大小: <span id="sizeValue">正常</span></label>
+                    <input type="range" id="sizeRange" min="0.5" max="2" step="0.1" value="1">
+                </div>
+                
+                <div class="buttons">
+                    <button id="pauseBtn">
+                        <i class="fas fa-pause"></i> 暂停/继续心跳
+                    </button>
+                    <button id="colorBtn">
+                        <i class="fas fa-palette"></i> 更换心脏颜色
+                    </button>
+                    <button id="resetBtn">
+                        <i class="fas fa-redo"></i> 重置所有设置
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>❤️ 这个页面专为微信H5设计，愿你感受到温暖与爱意 ❤️</p>
+            <div class="wechat-tip">
+                <i class="fas fa-info-circle"></i> 
+                提示：此页面已针对微信浏览器优化，点击心脏可增强跳动效果，长按可保存图片分享给好友。
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const heart = document.getElementById('mainHeart');
+            const speedRange = document.getElementById('speedRange');
+            const sizeRange = document.getElementById('sizeRange');
+            const speedValue = document.getElementById('speedValue');
+            const sizeValue = document.getElementById('sizeValue');
+            const pauseBtn = document.getElementById('pauseBtn');
+            const colorBtn = document.getElementById('colorBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const floatingHearts = document.getElementById('floatingHearts');
+            
+            let isPaused = false;
+            let heartColors = [
+                '#ff0000', // 红色
+                '#ff6b6b', // 浅红色
+                '#ff1493', // 深粉红色
+                '#ff4500', // 橙红色
+                '#ff3366', // 玫红色
+                '#ff0055', // 亮红色
+                '#ff4d94'  // 粉色
+            ];
+            let currentColorIndex = 0;
+            
+            // 初始化浮动小心心
+            function createFloatingHearts() {
+                floatingHearts.innerHTML = '';
+                for (let i = 0; i < 12; i++) {
+                    const floatingHeart = document.createElement('div');
+                    floatingHeart.className = 'floating-heart';
+                    floatingHeart.innerHTML = '❤️';
+                    floatingHeart.style.left = `${Math.random() * 100}%`;
+                    floatingHeart.style.animationDelay = `${Math.random() * 4}s`;
+                    floatingHeart.style.fontSize = `${Math.random() * 20 + 16}px`;
+                    floatingHearts.appendChild(floatingHeart);
+                }
+            }
+            
+            // 更新心跳速度
+            speedRange.addEventListener('input', function() {
+                const speed = parseFloat(this.value);
+                heart.style.animationDuration = `${1.2 / speed}s`;
+                
+                // 更新显示文本
+                if (speed < 0.8) {
+                    speedValue.textContent = '缓慢';
+                } else if (speed > 1.3) {
+                    speedValue.textContent = '快速';
+                } else {
+                    speedValue.textContent = '正常';
+                }
+            });
+            
+            // 更新心脏大小
+            sizeRange.addEventListener('input', function() {
+                const size = parseFloat(this.value);
+                heart.style.width = `${180 * size}px`;
+                heart.style.height = `${180 * size}px`;
+                
+                // 调整伪元素大小
+                const beforeAfterSize = 180 * size;
+                document.styleSheets[0].insertRule(
+                    `.heart:before, .heart:after { width: ${beforeAfterSize}px; height: ${beforeAfterSize}px; }`, 
+                    document.styleSheets[0].cssRules.length
+                );
+                
+                // 调整伪元素位置
+                document.styleSheets[0].insertRule(
+                    `.heart:before { top: -${beforeAfterSize/2}px; }`, 
+                    document.styleSheets[0].cssRules.length
+                );
+                
+                document.styleSheets[0].insertRule(
+                    `.heart:after { left: -${beforeAfterSize/2}px; }`, 
+                    document.styleSheets[0].cssRules.length
+                );
+                
+                // 更新显示文本
+                if (size < 0.8) {
+                    sizeValue.textContent = '较小';
+                } else if (size > 1.3) {
+                    sizeValue.textContent = '较大';
+                } else {
+                    sizeValue.textContent = '正常';
+                }
+            });
+            
+            // 暂停/继续心跳
+            pauseBtn.addEventListener('click', function() {
+                isPaused = !isPaused;
+                if (isPaused) {
+                    heart.style.animationPlayState = 'paused';
+                    pauseBtn.innerHTML = '<i class="fas fa-play"></i> 继续心跳';
+                } else {
+                    heart.style.animationPlayState = 'running';
+                    pauseBtn.innerHTML = '<i class="fas fa-pause"></i> 暂停心跳';
+                }
+            });
+            
+            // 更换心脏颜色
+            colorBtn.addEventListener('click', function() {
+                currentColorIndex = (currentColorIndex + 1) % heartColors.length;
+                const newColor = heartColors[currentColorIndex];
+                
+                // 更新心脏颜色
+                heart.style.backgroundColor = newColor;
+                heart.style.boxShadow = `0 0 50px ${newColor}99, inset 0 0 30px ${newColor}cc`;
+                
+                // 更新伪元素颜色
+                document.styleSheets[0].insertRule(
+                    `.heart:before, .heart:after { background-color: ${newColor}; }`, 
+                    document.styleSheets[0].cssRules.length
+                );
+                
+                // 显示颜色名称
+                const colorNames = ['经典红', '浅粉红', '深粉红', '橙红色', '玫红色', '亮红色', '浪漫粉'];
+                colorBtn.innerHTML = `<i class="fas fa-palette"></i> 颜色: ${colorNames[currentColorIndex]}`;
+            });
+            
+            // 重置所有设置
+            resetBtn.addEventListener('click', function() {
+                // 重置滑块
+                speedRange.value = 1;
+                sizeRange.value = 1;
+                
+                // 重置动画
+                heart.style.animationDuration = '1.2s';
+                heart.style.animationPlayState = 'running';
+                isPaused = false;
+                
+                // 重置大小
+                heart.style.width = '180px';
+                heart.style.height = '180px';
+                
+                // 重置颜色
+                currentColorIndex = 0;
+                heart.style.backgroundColor = '#ff0000';
+                heart.style.boxShadow = '0 0 50px rgba(255, 0, 0, 0.8), inset 0 0 30px rgba(255, 100, 100, 0.6)';
+                
+                // 更新显示文本
+                speedValue.textContent = '正常';
+                sizeValue.textContent = '正常';
+                pauseBtn.innerHTML = '<i class="fas fa-pause"></i> 暂停心跳';
+                colorBtn.innerHTML = '<i class="fas fa-palette"></i> 更换心脏颜色';
+                
+                // 重新创建浮动小心心
+                createFloatingHearts();
+                
+                // 显示重置成功提示
+                const originalText = resetBtn.innerHTML;
+                resetBtn.innerHTML = '<i class="fas fa-check"></i> 已重置!';
+                setTimeout(() => {
+                    resetBtn.innerHTML = originalText;
+                }, 1500);
+            });
+            
+            // 点击心脏增强跳动效果
+            heart.addEventListener('click', function() {
+                // 添加点击效果
+                this.style.transform = 'rotate(45deg) scale(1.3)';
+                this.style.boxShadow = '0 0 80px rgba(255, 0, 0, 1), inset 0 0 50px rgba(255, 150, 150, 0.9)';
+                
+                // 恢复原状
+                setTimeout(() => {
+                    this.style.transform = 'rotate(45deg) scale(1)';
+                    this.style.boxShadow = '0 0 50px rgba(255, 0, 0, 0.8), inset 0 0 30px rgba(255, 100, 100, 0.6)';
+                }, 300);
+                
+                // 创建点击特效
+                const clickEffect = document.createElement('div');
+                clickEffect.style.position = 'absolute';
+                clickEffect.style.width = '100px';
+                clickEffect.style.height = '100px';
+                clickEffect.style.borderRadius = '50%';
+                clickEffect.style.background = 'radial-gradient(circle, rgba(255,100,100,0.7) 0%, transparent 70%)';
+                clickEffect.style.top = '50%';
+                clickEffect.style.left = '50%';
+                clickEffect.style.transform = 'translate(-50%, -50%)';
+                clickEffect.style.zIndex = '5';
+                clickEffect.style.animation = 'pulse 0.8s forwards';
+                
+                heart.parentElement.appendChild(clickEffect);
+                
+                // 移除特效元素
+                setTimeout(() => {
+                    clickEffect.remove();
+                }, 800);
+            });
+            
+            // 长按心脏保存为图片（微信中可能限制，但提供功能）
+            let pressTimer;
+            heart.addEventListener('touchstart', function(e) {
+                pressTimer = setTimeout(() => {
+                    // 创建自定义长按提示
+                    const tip = document.createElement('div');
+                    tip.style.position = 'fixed';
+                    tip.style.top = '50%';
+                    tip.style.left = '50%';
+                    tip.style.transform = 'translate(-50%, -50%)';
+                    tip.style.background = 'rgba(0,0,0,0.8)';
+                    tip.style.color = 'white';
+                    tip.style.padding = '15px 25px';
+                    tip.style.borderRadius = '10px';
+                    tip.style.zIndex = '1000';
+                    tip.style.fontSize = '1.2rem';
+                    tip.textContent = '❤️ 长按成功！可截图分享给好友 ❤️';
+                    
+                    document.body.appendChild(tip);
+                    
+                    setTimeout(() => {
+                        tip.remove();
+                    }, 2000);
+                }, 800); // 长按800ms触发
+            });
+            
+            heart.addEventListener('touchend', function() {
+                clearTimeout(pressTimer);
+            });
+            
+            // 初始化浮动小心心
+            createFloatingHearts();
+            
+            // 微信环境检测
+            if (/MicroMessenger/i.test(navigator.userAgent)) {
+                console.log('微信浏览器环境检测通过');
+            } else {
+                console.log('非微信浏览器，部分功能可能受限');
+            }
+        });
+    </script>
+</body>
+</html>
