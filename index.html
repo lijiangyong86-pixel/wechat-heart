@@ -291,12 +291,27 @@
         小李已经传递给小朱 <span id="clickCount">0</span> 次爱意
     </div>
 
+     <!-- 简化的音频部分 -->
+    <audio id="bgm" autoplay loop>
+        <source src="123.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="clickSound">
+        <source src="123.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const heart = document.getElementById('heart');
             const body = document.body;
             const heartContainer = document.querySelector('.heart-container');
             const clickCountElement = document.getElementById('clickCount');
+
+            // 简化的音频处理 - 直接尝试自动播放
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgm = document.getElementById('bgm');
+            // 直接尝试播放背景音乐
+            bgm.play().catch(e => console.log("背景音乐可能被浏览器阻止自动播放"));
+        });
             
             // 爱意讯息库
             const messages = [
@@ -340,6 +355,9 @@
                 // 增加点击计数
                 clickCount++;
                 clickCountElement.textContent = clickCount;
+
+                document.getElementById('clickSound').play().catch(e => console.log("音效播放失败"));
+
                 
                 // 触发页面闪烁效果
                 body.classList.add('flash-effect');
